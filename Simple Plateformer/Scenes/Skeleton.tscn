@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://Scenes/Skeleton.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Characters/zombie_n_skeleton2.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 14.4866, 12.4225 )
+
+[sub_resource type="Animation" id=2]
+
+resource/name = "Walking"
+length = 0.8
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": FloatArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 21, 22, 23, 25 ]
+}
+
+[node name="Skeleton" type="KinematicBody2D" groups=[
+"ennemies",
+]]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1.95253, 0, 6.8351 )
+shapes/0/trigger = false
+collision/layers = 4
+collision/mask = 2
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+vframes = 4
+hframes = 9
+frame = 22
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0, 6.8351 )
+transform/scale = Vector2( 1, 1.95253 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/Walking = SubResource( 2 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+
